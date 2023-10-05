@@ -12,7 +12,6 @@
     - [Key Features ](#key-features-)
   - [🚀 You can check the Live Demo here](#-you-can-check-the-live-demo-here)
   - [💻 Getting Started ](#-getting-started-)
-  - [💻 Getting Started ](#-getting-started--1)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Usage](#usage)
@@ -69,10 +68,6 @@ The live demo will be availabe soon
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 💻 Getting Started <a name="getting-started"></a>
-
-To get a local copy up and running cloning this repo `https://github.com/BenMKT/OOP-school-library.git`.
-
 ### Prerequisites
 
 There are no known prerequisites to run this project.
@@ -108,6 +103,7 @@ To run the project:
 
 > 👤 **Benson Kiai**
 - GitHub: [@Benson](https://github.com/BenMKT)
+- LinkedIn: [Benson Kiai](https://www.linkedin.com/in/bensonkiai)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
