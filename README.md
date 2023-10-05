@@ -103,6 +103,7 @@ To run the project:
 
 > 👤 **Benson Kiai**
 - GitHub: [@Benson](https://github.com/BenMKT)
+- LinkedIn: [Benson Kiai](https://www.linkedin.com/in/bensonkiai)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
