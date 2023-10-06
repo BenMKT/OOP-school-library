@@ -15,7 +15,9 @@
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Usage](#usage)
+    - [Run tests](#run-tests)
   - [👥 Authors ](#-authors-)
+  - [🔭 Future Features ](#-future-features-)
   - [🤝 Contributing ](#-contributing-)
   - [⭐️ Show your support ](#️-show-your-support-)
   - [🙏 Acknowledgments ](#-acknowledgments-)
@@ -24,7 +26,7 @@
 
 # 📖OOP school library <a name="about-project"></a>
 
-**OOP school library** In this project, I start building my school library app. In this initial step, I implement the classes to represent students and teachers.
+**OOP school library** In this project, I start building my school library app. In this initial step, I implement the classes to represent students and teachers. I also finished creating the remaining classes for our school library and created the associations between them.
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
@@ -70,10 +72,10 @@ The live demo will be availabe soon
 
 ### Prerequisites
 
-There are no known prerequisites to run this project.
-If you encounter any issues trying to run it, please feel free to
-[open a ticket](https://github.com/BenMKT/OOP-school-library/issues) to let me know and i will work on it to the best
-of my abilities
+ You need the following tools be installed in your computer:
+ - [Git](https://www.linode.com/docs/guides/how-to-install-git-on-linux-mac-and-windows/)
+ - [Ruby](https://github.com/microverseinc/curriculum-ruby/blob/main/simple-ruby/articles/ruby_installation_instructions.md)
+ - IDE
 
 ### Setup
 
@@ -87,13 +89,19 @@ or
 
 ### Usage
 
-To run the project:
-
-- Method 1:
+To run the project, execute the following command:
 
 ```sh
-  cd PATH_TO_CLONE
+  ruby main.rb
 ```
+### Run tests
+
+To run tests, run the following command:
+
+```sh
+  rspec spec/
+```
+...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,6 +112,12 @@ To run the project:
 > 👤 **Benson Kiai**
 - GitHub: [@Benson](https://github.com/BenMKT)
 - LinkedIn: [Benson Kiai](https://www.linkedin.com/in/bensonkiai)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- OOP school library: add basic UI
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
