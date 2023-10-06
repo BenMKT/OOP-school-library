@@ -1,4 +1,4 @@
-require_relative 'class_person'
+require_relative 'person'
 
 class Teacher < Person
   attr_reader :specialization
