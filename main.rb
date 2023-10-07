@@ -12,9 +12,8 @@ def display_options
   puts '7. Exit'
 end
 
-# This method is the main method that will run and exit the app
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength
-def main
+# This method is the main method that will run the app
+def main # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
   app = App.new
 
   loop do
