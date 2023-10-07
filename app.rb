@@ -29,23 +29,23 @@ class App
     person_type = gets.chomp.to_i
 
     if person_type == 1
-      print 'Student age:'
+      puts 'Student age:'
       age = gets.chomp.to_i
-      print 'Student name:'
+      puts 'Student name:'
       name = gets.chomp
-      print 'has parent permission? [Y/N]'
+      puts 'has parent permission? [Y/N]'
       parent_permission = gets.chomp.downcase
-      print 'Enter classroom:'
+      puts 'Enter classroom:'
       classroom_name = gets.chomp
       classroom = Classroom.new(classroom_name)
       person = Student.new(age, classroom, name, parent_permission: parent_permission)
 
     elsif person_type == 2
-      print 'Teacher name:  '
+      puts 'Teacher name:'
       name = gets.chomp
-      print 'Teacher age:  '
+      puts 'Teacher age:'
       age = gets.chomp.to_i
-      print 'Teacher specialization:  '
+      puts 'Teacher specialization:'
       specialization = gets.chomp
       person = Teacher.new(age, specialization, name)
 
@@ -135,7 +135,6 @@ class App
     else
       puts 'Invalid choice. Please select a valid option.'
     end
-    :continue
   end
 
   def run
