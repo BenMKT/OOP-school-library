@@ -4,7 +4,6 @@ require_relative 'student'
 require_relative 'classroom'
 require_relative 'teacher'
 require_relative 'rental'
-
 class App
   def initialize
     @books = []
@@ -24,7 +23,7 @@ class App
     end
   end
 
-  def create_person
+  def create_person # rubocop:disable Metrics/MethodLength
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp.to_i
 
@@ -115,7 +114,7 @@ class App
     puts 'Thank you for using the app. Goodbye!'
   end
 
-  def process(choice)
+  def process(choice) # rubocop:disable Metrics/CyclomaticComplexity
     case choice
     when 1
       list_books
