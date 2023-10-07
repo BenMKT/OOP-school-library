@@ -26,9 +26,9 @@ class App
 
   def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
-    person_type = gets.chomp.downcase
+    person_type = gets.chomp.to_i
 
-    if person_type == "1"
+    if person_type == 1
       print 'Student age:'
       age = gets.chomp.to_i
       print 'Student name:'
@@ -39,14 +39,16 @@ class App
       classroom_name = gets.chomp
       classroom = Classroom.new(classroom_name)
       person = Student.new(age, classroom, name, parent_permission: parent_permission)
-      elsif person_type == "2"
-      print 'Teacher name:'
+
+    elsif person_type == 2
+      print 'Teacher name:  '
       name = gets.chomp
-      print 'Teacher age:'
+      print 'Teacher age:  '
       age = gets.chomp.to_i
-      print 'Teacher specialization:'
+      print 'Teacher specialization:  '
       specialization = gets.chomp
       person = Teacher.new(age, specialization, name)
+
     else
       puts 'Invalid person type.'
       return
@@ -141,10 +143,8 @@ class App
       display_options
       print 'Please choose an option by selecting a number: '
       choice = gets.chomp.to_i
-
       result = process(choice)
       break if result == :quit
-
     end
   end
 end
