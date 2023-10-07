@@ -135,7 +135,7 @@ class App
     else
       puts 'Invalid choice. Please select a valid option.'
     end
-      :continue
+    :continue
   end
 
   def run
