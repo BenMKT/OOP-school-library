@@ -23,7 +23,7 @@ class App
     end
   end
 
-  def create_person
+  def create_person # rubocop:disable Metrics/MethodLength
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp.to_i
 
