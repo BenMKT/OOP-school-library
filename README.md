@@ -10,8 +10,7 @@
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
-  - [🚀 You can check the Live Demo here](#-you-can-check-the-live-demo-here)
-  - [💻 Getting Started ](#-getting-started-)
+  - [� Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Usage](#usage)
@@ -26,7 +25,7 @@
 
 # 📖OOP school library <a name="about-project"></a>
 
-**OOP school library** In this project, I start building my school library app. In this initial step, I implement the classes to represent students and teachers. I also finished creating the remaining classes for our school library and created the associations between them.
+**OOP school library** In this project, I start building my school library app. In this initial step, I implement the classes to represent students and teachers. I also finished creating the remaining classes for our school library and created the associations between them. Also created a form of UI for school library app, this way it can be invoked as an executable and not something you use in IRB exclusively.
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
@@ -46,12 +45,12 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LIVE DEMO -->
+<!-- LIVE DEMO 
 
 ## 🚀 You can check the Live Demo here<a name="live-demo"></a>
 
 The live demo will be availabe soon
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>-->
 
 <!-- GETTING STARTED -->
 
