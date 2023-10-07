@@ -23,28 +23,28 @@ class App
     end
   end
 
-  def create_person # rubocop:disable Metrics/MethodLength
+  def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp.to_i
 
     if person_type == 1
-      puts 'Student age:'
+      print 'Student age:  '
       age = gets.chomp.to_i
-      puts 'Student name:'
+      print 'Student name:  '
       name = gets.chomp
-      puts 'has parent permission? [Y/N]'
+      print 'has parent permission? [Y/N]'
       parent_permission = gets.chomp.downcase
-      puts 'Enter classroom:'
+      print 'Enter classroom:  '
       classroom_name = gets.chomp
       classroom = Classroom.new(classroom_name)
       person = Student.new(age, classroom, name, parent_permission: parent_permission)
 
     elsif person_type == 2
-      puts 'Teacher name:'
+      print 'Teacher name:  '
       name = gets.chomp
-      puts 'Teacher age:'
+      print 'Teacher age:  '
       age = gets.chomp.to_i
-      puts 'Teacher specialization:'
+      print 'Teacher specialization:  '
       specialization = gets.chomp
       person = Teacher.new(age, specialization, name)
 
@@ -58,12 +58,10 @@ class App
   end
 
   def create_book
-    print 'Enter title:'
+    print 'Enter title:  '
     title = gets.chomp
-
-    print 'Enter author:'
+    print 'Enter author:  '
     author = gets.chomp
-
     book = Book.new(title, author)
     @books.push(book)
     puts 'Book created successfully!'
@@ -73,14 +71,11 @@ class App
     puts 'Please press the number corresponding to the book that you want:'
     list_books
     book_index = gets.chomp.to_i - 1
-
     puts 'Please type your ID:'
     list_people
     person_id = gets.chomp.to_i - 1
-
     print 'Enter rental date (YYYY-MM-DD):'
     date = gets.chomp
-
     rental = @people[person_id].add_rental(@books[book_index], date)
     @rentals.push(rental)
     puts 'The book has been rented successfully!'
@@ -90,63 +85,10 @@ class App
     puts 'To view your rental records, type your ID:'
     list_people
     person_id = gets.chomp.to_i - 1
-
     person = @people[person_id]
     puts "Rentals for #{person.name}:"
     person.rentals.each do |rental|
       puts "Date: #{rental.date}, Book: #{rental.book.title}"
     end
   end
-
-  def display_options
-    puts 'Options:'
-    puts '1. List all books'
-    puts '2. List all people'
-    puts '3. Create a person'
-    puts '4. Create a book'
-    puts '5. Create a rental'
-    puts '6. List rentals for a person'
-    puts '7. Exit'
-  end
-
-  def exit_message
-    puts 'Enter number again to confirm exit?'
-    puts 'Thank you for using the app. Goodbye!'
-  end
-
-  def process(choice) # rubocop:disable Metrics/CyclomaticComplexity
-    case choice
-    when 1
-      list_books
-    when 2
-      list_people
-    when 3
-      create_person
-    when 4
-      create_book
-    when 5
-      create_rental
-    when 6
-      list_rentals_for_person
-    when 7
-      exit_message
-      return :quit
-    else
-      puts 'Invalid choice. Please select a valid option.'
-    end
-    :continue
-  end
-
-  def run
-    loop do
-      display_options
-      print 'Please choose an option by selecting a number: '
-      choice = gets.chomp.to_i
-      result = process(choice)
-      break if result == :quit
-    end
-  end
 end
-
-app = App.new
-app.run
