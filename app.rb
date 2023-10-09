@@ -99,9 +99,9 @@ class App
     end
   end
 
-  def run # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity 
+  def run # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
     loop do
-    display_options
+      display_options
     option = gets.chomp.to_i
     if option == 7
       puts 'Thank you for using the app. Goodbye!'
