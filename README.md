@@ -10,7 +10,7 @@
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
-  - [� Getting Started ](#-getting-started-)
+  - [💻 Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Usage](#usage)
@@ -25,7 +25,7 @@
 
 # 📖OOP school library <a name="about-project"></a>
 
-**OOP school library** In this project, I start building my school library app. In this initial step, I implement the classes to represent students and teachers. I also finished creating the remaining classes for our school library and created the associations between them. Also created a form of UI for school library app, this way it can be invoked as an executable and not something you use in IRB exclusively.
+**OOP school library** In this project, implemented various classes with associations between them. Also created a form of UI for the school library app, this way it can be invoked as an executable from CLI whilst maintaining focus on maintainability, readability, and adherence to best practices.
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
