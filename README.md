@@ -112,6 +112,10 @@ To run tests, run the following command:
 - GitHub: [@Benson](https://github.com/BenMKT)
 - LinkedIn: [Benson Kiai](https://www.linkedin.com/in/bensonkiai)
 
+> 👤 **Diariatou Diakite**
+- GitHub: [@Diarisdiakite](https://github.com/diarisdiakite)
+- LinkedIn: [Diariadou-Diakite](https://www.linkedin.com/in/diariatou-diakite-67ab80165/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
