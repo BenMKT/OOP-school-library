@@ -38,30 +38,30 @@ class App
   end
 
   def create_student
-      print 'Student age:  '
-      age = gets.chomp.to_i
-      print 'Student name:  '
-      name = gets.chomp
-      print 'has parent permission? [Y/N]'
-      parent_permission = gets.chomp.downcase
-      print 'Enter classroom:  '
-      classroom_name = gets.chomp
-      classroom = Classroom.new(classroom_name)
-      student = Student.new(age, classroom, name, parent_permission: parent_permission)
-      @people.push(student)
-      puts "Student created successfully!"
+    print 'Student age:  '
+    age = gets.chomp.to_i
+    print 'Student name:  '
+    name = gets.chomp
+    print 'has parent permission? [Y/N]'
+    parent_permission = gets.chomp.downcase
+    print 'Enter classroom:  '
+    classroom_name = gets.chomp
+    classroom = Classroom.new(classroom_name)
+    student = Student.new(age, classroom, name, parent_permission: parent_permission)
+    @people.push(student)
+    puts 'Student created successfully!'
   end
 
   def create_teacher
-      print 'Teacher name:  '
-      name = gets.chomp
-      print 'Teacher age:  '
-      age = gets.chomp.to_i
-      print 'Teacher specialization:  '
-      specialization = gets.chomp
-      teacher = Teacher.new(age, specialization, name)
-      @people.push(teacher)
-      puts "Teacher created successfully!"
+    print 'Teacher name:  '
+    name = gets.chomp
+    print 'Teacher age:  '
+    age = gets.chomp.to_i
+    print 'Teacher specialization:  '
+    specialization = gets.chomp
+    teacher = Teacher.new(age, specialization, name)
+    @people.push(teacher)
+    puts 'Teacher created successfully!'
   end
 
   def create_book
@@ -99,7 +99,7 @@ class App
     end
   end
 
-  def run
+  def run # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity 
     loop do
     display_options
     option = gets.chomp.to_i
@@ -124,6 +124,6 @@ class App
     else
       puts 'Error: Invalid number, try again'
     end
-  end
+    end
   end
 end
