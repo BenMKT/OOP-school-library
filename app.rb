@@ -23,11 +23,21 @@ class App
     end
   end
 
-  def create_person # rubocop:disable Metrics/MethodLength
+  def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp.to_i
 
-    if person_type == 1
+    case person_type
+    when 1
+      create_student
+    when 2
+      create_teacher
+    else
+      puts 'Invalid person type.'
+    end
+  end
+
+  def create_student
       print 'Student age:  '
       age = gets.chomp.to_i
       print 'Student name:  '
@@ -37,24 +47,21 @@ class App
       print 'Enter classroom:  '
       classroom_name = gets.chomp
       classroom = Classroom.new(classroom_name)
-      person = Student.new(age, classroom, name, parent_permission: parent_permission)
+      student = Student.new(age, classroom, name, parent_permission: parent_permission)
+      @people.push(student)
+      puts "Student created successfully!"
+  end
 
-    elsif person_type == 2
+  def create_teacher
       print 'Teacher name:  '
       name = gets.chomp
       print 'Teacher age:  '
       age = gets.chomp.to_i
       print 'Teacher specialization:  '
       specialization = gets.chomp
-      person = Teacher.new(age, specialization, name)
-
-    else
-      puts 'Invalid person type.'
-      return
-    end
-
-    @people.push(person)
-    puts "#{person.class.name} created successfully!"
+      teacher = Teacher.new(age, specialization, name)
+      @people.push(teacher)
+      puts "Teacher created successfully!"
   end
 
   def create_book
@@ -90,5 +97,33 @@ class App
     person.rentals.each do |rental|
       puts "Date: #{rental.date}, Book: #{rental.book.title}"
     end
+  end
+
+  def run
+    loop do
+    display_options
+    option = gets.chomp.to_i
+    if option == 7
+      puts 'Thank you for using the app. Goodbye!'
+      break
+    elsif option.between?(1, 6)
+      case option
+      when 1
+        list_books
+      when 2
+        list_people
+      when 3
+        create_person
+      when 4
+        create_book
+      when 5
+        create_rental
+      when 6
+        list_rentals_for_person
+      end
+    else
+      puts 'Error: Invalid number, try again'
+    end
+  end
   end
 end
