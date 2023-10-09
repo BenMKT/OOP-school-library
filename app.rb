@@ -102,28 +102,28 @@ class App
   def run # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
     loop do
       display_options
-    option = gets.chomp.to_i
-    if option == 7
-      puts 'Thank you for using the app. Goodbye!'
-      break
-    elsif option.between?(1, 6)
-      case option
-      when 1
-        list_books
-      when 2
-        list_people
-      when 3
-        create_person
-      when 4
-        create_book
-      when 5
-        create_rental
-      when 6
-        list_rentals_for_person
+      option = gets.chomp.to_i
+      if option == 7
+        puts 'Thank you for using the app. Goodbye!'
+        break
+      elsif option.between?(1, 6)
+        case option
+        when 1
+          list_books
+        when 2
+          list_people
+        when 3
+          create_person
+        when 4
+          create_book
+        when 5
+          create_rental
+        when 6
+          list_rentals_for_person
+        end
+      else
+        puts 'Error: Invalid number, try again'
       end
-    else
-      puts 'Error: Invalid number, try again'
-    end
     end
   end
 end
