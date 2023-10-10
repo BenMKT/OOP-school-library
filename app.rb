@@ -18,8 +18,8 @@ class App
   end
 
   def list_people
-    @people.each_with_index do |person, id|
-      puts "[#{person.class.name}], Name: #{person.name}, Age: #{person.age}, ID: #{id + 1}"
+    @people.each_with_index do |person, index|
+      puts "#{index + 1}) [#{person.class.name}], Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
     end
   end
 
@@ -75,55 +75,31 @@ class App
   end
 
   def create_rental
-    puts 'Please press the number corresponding to the book that you want:'
+    puts 'Please press the number corresponding to the book that you want: '
     list_books
     book_index = gets.chomp.to_i - 1
-    puts 'Please type your ID:'
+    puts 'Please type your corresponding index:'
     list_people
-    person_id = gets.chomp.to_i - 1
-    print 'Enter rental date (YYYY-MM-DD):'
+    person_index = gets.chomp.to_i - 1
+    print 'Enter rental date (YYYY-MM-DD): '
     date = gets.chomp
-    rental = @people[person_id].add_rental(@books[book_index], date)
+    person = @people[person_index]
+    rental = person.add_rental(@books[book_index], date)
     @rentals.push(rental)
     puts 'The book has been rented successfully!'
   end
 
   def list_rentals_for_person
-    puts 'To view your rental records, type your ID:'
-    list_people
-    person_id = gets.chomp.to_i - 1
-    person = @people[person_id]
-    puts "Rentals for #{person.name}:"
+    print 'To view your rental records, type your ID: '
+    person_id = gets.chomp.to_i
+    person = @people.find { |p| p.id == person_id }
+    if person.nil?
+      puts 'Person not found'
+      return
+    end
+    puts "Rentals for #{person.name} (id: #{person.id}):"
     person.rentals.each do |rental|
       puts "Date: #{rental.date}, Book: #{rental.book.title}"
-    end
-  end
-
-  def run # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
-    loop do
-      display_options
-      option = gets.chomp.to_i
-      if option == 7
-        puts 'Thank you for using the app. Goodbye!'
-        break
-      elsif option.between?(1, 6)
-        case option
-        when 1
-          list_books
-        when 2
-          list_people
-        when 3
-          create_person
-        when 4
-          create_book
-        when 5
-          create_rental
-        when 6
-          list_rentals_for_person
-        end
-      else
-        puts 'Error: Invalid number, try again'
-      end
     end
   end
 end
