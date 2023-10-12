@@ -4,6 +4,7 @@ require_relative 'student'
 require_relative 'classroom'
 require_relative 'teacher'
 require_relative 'rental'
+require 'json'
 class App # rubocop:disable Metrics/ClassLength
   attr_reader :books, :people, :rentals
 
@@ -78,7 +79,7 @@ class App # rubocop:disable Metrics/ClassLength
   end
 
   def create_rental
-    puts 'Please press the number corresponding to the book that you want: '
+    puts 'Please press the index corresponding to the book that you want: '
     list_books
     book_index = gets.chomp.to_i - 1
     puts 'Please type your corresponding index:'
@@ -163,15 +164,16 @@ class App # rubocop:disable Metrics/ClassLength
 
   def load_rentals
     return unless File.exist?('rentals.json')
+
     rentals_data = JSON.parse(File.read('rentals.json'))
     rentals_data.each do |data|
       person_index = data['person_index']
       next if person_index.nil?
+
       person = @people[person_index]
       book = @books[data['book_index']]
       rental = person.add_rental(book, data['date'])
       @rentals.push(rental)
     end
   end
-
 end
