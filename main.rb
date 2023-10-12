@@ -20,9 +20,6 @@ def main # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
     if option == 7
       puts 'Saving data...'
       app.save_data
-      # File.write('books.json', app.instance_variable_get(:@books).to_json)
-      # File.write('people.json', app.instance_variable_get(:@people).to_json)
-      # File.write('rentals.json', app.instance_variable_get(:@rentals).to_json)
       puts 'Thank you for using the app. Goodbye!'
       break
     elsif option.between?(1, 6)
