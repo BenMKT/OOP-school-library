@@ -161,4 +161,17 @@ class App # rubocop:disable Metrics/ClassLength
     end
   end
 
+  def load_rentals
+    return unless File.exist?('rentals.json')
+    rentals_data = JSON.parse(File.read('rentals.json'))
+    rentals_data.each do |data|
+      person_index = data['person_index']
+      next if person_index.nil?
+      person = @people[person_index]
+      book = @books[data['book_index']]
+      rental = person.add_rental(book, data['date'])
+      @rentals.push(rental)
+    end
+  end
+
 end
