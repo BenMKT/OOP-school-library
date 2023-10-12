@@ -4,11 +4,15 @@ require_relative 'student'
 require_relative 'classroom'
 require_relative 'teacher'
 require_relative 'rental'
-class App
+require 'json'
+class App # rubocop:disable Metrics/ClassLength
+  attr_reader :books, :people, :rentals
+
   def initialize
     @books = []
     @people = []
     @rentals = []
+    load_data
   end
 
   def list_books
@@ -75,7 +79,7 @@ class App
   end
 
   def create_rental
-    puts 'Please press the number corresponding to the book that you want: '
+    puts 'Please press the index corresponding to the book that you want: '
     list_books
     book_index = gets.chomp.to_i - 1
     puts 'Please type your corresponding index:'
@@ -100,6 +104,78 @@ class App
     puts "Rentals for #{person.name} (id: #{person.id}):"
     person.rentals.each do |rental|
       puts "Date: #{rental.date}, Book: #{rental.book.title}"
+    end
+  end
+
+  def save_data # rubocop:disable Metrics/MethodLength
+    books_data = @books.map { |book| { title: book.title, author: book.author } }
+    people_data = @people.map do |person|
+      data = { name: person.name, age: person.age }
+      if person.is_a?(Student)
+        data[:type] = 'student'
+        data[:classroom] = person.classroom.label
+      elsif person.is_a?(Teacher)
+        data[:type] = 'teacher'
+        data[:specialization] = person.specialization
+      end
+      data
+    end
+    rentals_data = @rentals.map do |rental|
+      {
+        person_index: @people.index(rental.person),
+        book_index: @books.index(rental.book),
+        date: rental.date
+      }
+    end
+
+    File.write('books.json', books_data.to_json)
+    File.write('people.json', people_data.to_json)
+    File.write('rentals.json', rentals_data.to_json)
+  end
+
+  def load_data
+    load_books
+    load_people
+    load_rentals
+  rescue Errno::ENOENT => e
+    puts "Error loading data: #{e.message}"
+  end
+
+  def load_books
+    return unless File.exist?('books.json')
+
+    books_data = JSON.parse(File.read('books.json'))
+    @books = books_data.map { |data| Book.new(data['title'], data['author']) }
+  end
+
+  def load_people
+    return unless File.exist?('people.json')
+
+    people_data = JSON.parse(File.read('people.json'))
+    people_data.each do |data|
+      if data['type'] == 'student'
+        classroom = Classroom.new(data['classroom'])
+        student = Student.new(data['age'], classroom, data['name'])
+        @people.push(student)
+      elsif data['type'] == 'teacher'
+        teacher = Teacher.new(data['age'], data['specialization'], data['name'])
+        @people.push(teacher)
+      end
+    end
+  end
+
+  def load_rentals
+    return unless File.exist?('rentals.json')
+
+    rentals_data = JSON.parse(File.read('rentals.json'))
+    rentals_data.each do |data|
+      person_index = data['person_index']
+      next if person_index.nil?
+
+      person = @people[person_index]
+      book = @books[data['book_index']]
+      rental = person.add_rental(book, data['date'])
+      @rentals.push(rental)
     end
   end
 end

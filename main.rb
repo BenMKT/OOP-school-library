@@ -18,6 +18,8 @@ def main # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
     display_options
     option = gets.chomp.to_i
     if option == 7
+      puts 'Saving data...'
+      app.save_data
       puts 'Thank you for using the app. Goodbye!'
       break
     elsif option.between?(1, 6)
