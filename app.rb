@@ -105,40 +105,75 @@ class App
     end
   end
 
-def load_data
-  begin
-    book_data = JSON.parse(File.read('books.json'))
-    book_data.each do |book|
-      @books << Book.new(book['title'], book['author'])
+  def save_data
+    books_data = @books.map { |book| { title: book.title, author: book.author } }
+    people_data = @people.map do |person|
+      data = { name: person.name, age: person.age }
+      if person.is_a?(Student)
+        data[:type] = 'student'
+        data[:classroom] = person.classroom.label
+      elsif person.is_a?(Teacher)
+        data[:type] = 'teacher'
+        data[:specialization] = person.specialization
+      end
+      data
     end
-  rescue Errno::ENOENT
-    puts 'Books file not found. Starting with empty books list.'
+    rentals_data = @rentals.map do |rental|
+      {
+        person_index: @people.index(rental.person),
+        book_index: @books.index(rental.book),
+        date: rental.date
+      }
+    end
+
+    File.write('books.json', books_data.to_json)
+    File.write('people.json', people_data.to_json)
+    File.write('rentals.json', rentals_data.to_json)
   end
-  begin
-    person_data = JSON.parse(File.read('people.json'))
-    person_data.each do |person|
-      if person['type'] == 'student'
-        @people << Student.new(person['name'], person['age'], person['id'], person['classroom'])
-      elsif person['type'] == 'teacher'
-        @people << Teacher.new(person['name'], person['age'], person['id'], person['specialization'])
+
+  def load_data
+    load_books
+    load_people
+    load_rentals
+  rescue Errno::ENOENT => e
+    puts "Error loading data: #{e.message}"
+  end
+
+  def load_books
+    return unless File.exist?('books.json')
+
+    books_data = JSON.parse(File.read('books.json'))
+    @books = books_data.map { |data| Book.new(data['title'], data['author']) }
+  end
+
+  def load_people
+    return unless File.exist?('people.json')
+
+    people_data = JSON.parse(File.read('people.json'))
+    people_data.each do |data|
+      if data['type'] == 'student'
+        classroom = Classroom.new(data['classroom'])
+        student = Student.new(data['age'], classroom, data['name'])
+        @people.push(student)
+      elsif data['type'] == 'teacher'
+        teacher = Teacher.new(data['age'], data['specialization'], data['name'])
+        @people.push(teacher)
       end
     end
-  rescue Errno::ENOENT
-    puts 'People file not found. Starting with empty people list.'
   end
-  begin
-    rental_data = JSON.parse(File.read('rentals.json'))
-    rental_data.each do |rental|
-      book = @books.find { |b| b.title == rental['book_title'] }
-      person = @people.find { |p| p.id == rental['person_id'] }
-      if book && person
-        Rental.new(book, person)
-      else
-        puts "Error: rental data is invalid. Skipping rental."
-      end
-    end
-  rescue Errno::ENOENT
-    puts 'Rentals file not found. Starting with empty rentals list.'
+
+  def load_rentals
+  return unless File.exist?('rentals.json')
+
+  rentals_data = JSON.parse(File.read('rentals.json'))
+  rentals_data.each do |data|
+    person_index = data['person_index']
+    next if person_index.nil?
+    person = @people[person_index]
+    book = @books[data['book_index']]
+    next if person.nil? # skip this iteration if person is nil
+    rental = person.add_rental(book, data['date'])
+    @rentals.push(rental)
   end
 end
 end
