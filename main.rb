@@ -18,6 +18,10 @@ def main # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
     display_options
     option = gets.chomp.to_i
     if option == 7
+      puts 'Saving data...'
+      File.write('books.json', app.instance_variable_get(:@books).to_json)
+      File.write('people.json', app.instance_variable_get(:@people).to_json)
+      File.write('rentals.json', app.instance_variable_get(:@rentals).to_json)
       puts 'Thank you for using the app. Goodbye!'
       break
     elsif option.between?(1, 6)
@@ -36,7 +40,7 @@ def main # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
         app.list_rentals_for_person
       end
     else
-      puts 'Error: Invalid number, try again'
+      puts 'Invalid option. Please try again.'
     end
   end
 end
