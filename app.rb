@@ -146,4 +146,19 @@ class App # rubocop:disable Metrics/ClassLength
     @books = books_data.map { |data| Book.new(data['title'], data['author']) }
   end
 
+  def load_people
+    return unless File.exist?('people.json')
+    people_data = JSON.parse(File.read('people.json'))
+    people_data.each do |data|
+      if data['type'] == 'student'
+        classroom = Classroom.new(data['classroom'])
+        student = Student.new(data['age'], classroom, data['name'])
+        @people.push(student)
+      elsif data['type'] == 'teacher'
+        teacher = Teacher.new(data['age'], data['specialization'], data['name'])
+        @people.push(teacher)
+      end
+    end
+  end
+
 end
