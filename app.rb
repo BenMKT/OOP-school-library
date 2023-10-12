@@ -4,11 +4,14 @@ require_relative 'student'
 require_relative 'classroom'
 require_relative 'teacher'
 require_relative 'rental'
-class App
+class App # rubocop:disable Metrics/ClassLength
+  attr_reader :books, :people, :rentals
+
   def initialize
     @books = []
     @people = []
     @rentals = []
+    load_data
   end
 
   def list_books
@@ -102,4 +105,39 @@ class App
       puts "Date: #{rental.date}, Book: #{rental.book.title}"
     end
   end
+
+  def save_data # rubocop:disable Metrics/MethodLength
+    books_data = @books.map { |book| { title: book.title, author: book.author } }
+    people_data = @people.map do |person|
+      data = { name: person.name, age: person.age }
+      if person.is_a?(Student)
+        data[:type] = 'student'
+        data[:classroom] = person.classroom.label
+      elsif person.is_a?(Teacher)
+        data[:type] = 'teacher'
+        data[:specialization] = person.specialization
+      end
+      data
+    end
+    rentals_data = @rentals.map do |rental|
+      {
+        person_index: @people.index(rental.person),
+        book_index: @books.index(rental.book),
+        date: rental.date
+      }
+    end
+
+    File.write('books.json', books_data.to_json)
+    File.write('people.json', people_data.to_json)
+    File.write('rentals.json', rentals_data.to_json)
+  end
+
+  def load_data
+    load_books
+    load_people
+    load_rentals
+  rescue Errno::ENOENT => e
+    puts "Error loading data: #{e.message}"
+  end
+
 end
