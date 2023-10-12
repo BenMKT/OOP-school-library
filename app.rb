@@ -5,7 +5,10 @@ require_relative 'classroom'
 require_relative 'teacher'
 require_relative 'rental'
 require 'json'
-class App
+class App # rubocop:disable Metrics/ClassLength
+
+  attr_reader :books, :people, :rentals
+  
   def initialize
     @books = []
     @people = []
@@ -105,7 +108,7 @@ class App
     end
   end
 
-  def save_data
+  def save_data # rubocop:disable Metrics/MethodLength
     books_data = @books.map { |book| { title: book.title, author: book.author } }
     people_data = @people.map do |person|
       data = { name: person.name, age: person.age }
@@ -164,16 +167,20 @@ class App
 
   def load_rentals
   return unless File.exist?('rentals.json')
+  return unless File.exist?('rentals.json')
 
-  rentals_data = JSON.parse(File.read('rentals.json'))
-  rentals_data.each do |data|
-    person_index = data['person_index']
-    next if person_index.nil?
-    person = @people[person_index]
-    book = @books[data['book_index']]
-    next if person.nil? # skip this iteration if person is nil
-    rental = person.add_rental(book, data['date'])
-    @rentals.push(rental)
+    return unless File.exist?('rentals.json')
+
+    rentals_data = JSON.parse(File.read('rentals.json'))
+    rentals_data.each do |data|
+      person_index = data['person_index']
+      next if person_index.nil?
+      person = @people[person_index]
+      book = @books[data['book_index']]
+      next if person.nil? # skip this iteration if person is nil
+
+      rental = person.add_rental(book, data['date'])
+      @rentals.push(rental)
+    end
   end
-end
 end
