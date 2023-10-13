@@ -12,11 +12,11 @@ describe Rental do
       expect(rental.date).to eql('2023-12-10')
     end
 
-    it "returns the correct book" do
+    it 'returns the correct book' do
       expect(rental.book).to eql(book)
     end
 
-    it "returns the correct person" do
+    it 'returns the correct person' do
       expect(rental.person).to eql(person)
     end
   end
